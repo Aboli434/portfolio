@@ -18,7 +18,7 @@ export default function IntentFlow({ project }: { project: Project }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c]/50 via-transparent to-transparent" />
           <div className="absolute bottom-4 left-4">
-            <span className="text-[10px] tracking-[0.3em] text-blue-400 uppercase">Live Preview</span>
+            <span className="text-[10px] tracking-[0.3em] text-blue-400 uppercase">Deployment Pending</span>
           </div>
         </div>
       </div>

@@ -21,51 +21,51 @@ export default function Experience() {
               <span className="text-[9px] tracking-[0.3em] font-sans text-foreground uppercase">Background</span>
             </div>
             <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[1.1]">
-              Chronology & <span className="italic text-primary">Experience</span>.
+              Experience &amp; <span className="italic text-primary">Education</span>.
             </h2>
           </motion.div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           
-          {/* Experience Chronology */}
+          {/* Experience */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            <h3 className="font-sans text-xs tracking-[0.3em] text-foreground-muted uppercase border-b border-foreground/10 pb-6 mb-10">Independent Experience</h3>
+            <h3 className="font-sans text-xs tracking-[0.3em] text-foreground-muted uppercase border-b border-foreground/10 pb-6 mb-10">Freelance &amp; Project Work</h3>
             
-            <div className="relative pl-6 border-l border-foreground/10">
+            <div className="relative pl-6 border-l border-foreground/10 mb-12">
               <div className="absolute top-1 -left-[3px] w-[5px] h-[5px] bg-primary rounded-full"></div>
               
               <div className="mb-4 flex items-center justify-between">
-                <p className="font-sans text-[10px] tracking-[0.2em] text-primary uppercase">Present</p>
+                <p className="font-sans text-[10px] tracking-[0.2em] text-primary uppercase">2023 — Present</p>
                 <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">Pune, IN</p>
               </div>
               
               <h4 className="font-display text-3xl font-medium text-foreground mb-2">Frontend Developer</h4>
-              <p className="font-sans text-sm text-foreground-muted uppercase tracking-widest mb-6">Independent Projects</p>
+              <p className="font-sans text-sm text-foreground-muted uppercase tracking-widest mb-6">Freelance / Client Projects</p>
               
               <ul className="flex flex-col gap-4 text-sm text-foreground font-light leading-relaxed">
                 <li className="relative pl-4">
                   <span className="absolute left-0 top-2 w-[3px] h-[3px] bg-foreground/40 rounded-full"></span>
-                  Built and shipped multiple full-stack and frontend applications focusing on refined UI/UX and fluid performance.
+                  Built and delivered client websites including Wedora (wedding platform), PRANSH (agriculture brand), and Aasamant (hospitality).
                 </li>
                 <li className="relative pl-4">
                   <span className="absolute left-0 top-2 w-[3px] h-[3px] bg-foreground/40 rounded-full"></span>
-                  Engineered 3D interactive experiences using React Three Fiber, WebGL, and precise GSAP animations.
+                  Translated Figma designs into pixel-accurate, responsive React applications with custom animations.
                 </li>
                 <li className="relative pl-4">
                   <span className="absolute left-0 top-2 w-[3px] h-[3px] bg-foreground/40 rounded-full"></span>
-                  Integrated complex APIs to translate unstructured data into highly organized, intuitive workflows.
+                  Developed IntentFlow, a personal AI-powered workflow platform integrating OpenAI APIs with a full-stack Next.js + Fastify architecture.
                 </li>
               </ul>
             </div>
           </motion.div>
           
-          {/* Education Chronology */}
+          {/* Education */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -78,15 +78,15 @@ export default function Experience() {
               <div className="absolute top-1 -left-[3px] w-[5px] h-[5px] bg-foreground/30 rounded-full"></div>
               
               <div className="mb-4 flex items-center justify-between">
-                <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">Expected 2025</p>
+                <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">2021 — 2025</p>
                 <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">Pune, IN</p>
               </div>
               
               <h4 className="font-display text-3xl font-medium text-foreground mb-2">Bachelor of Engineering</h4>
-              <p className="font-sans text-sm text-foreground-muted uppercase tracking-widest mb-6">Electronics & Telecommunication</p>
+              <p className="font-sans text-sm text-foreground-muted uppercase tracking-widest mb-6">Electronics &amp; Telecommunication</p>
               
               <p className="text-sm text-foreground font-light leading-relaxed">
-                Developing a rigorous foundation in systematic problem-solving, algorithms, and technical architecture, while bridging the gap between hardware interfaces and fluid software experiences.
+                Built a strong foundation in systematic problem-solving, algorithms, and technical architecture. Applied this analytical thinking directly to frontend engineering — building structured, performant web applications.
               </p>
             </div>
           </motion.div>

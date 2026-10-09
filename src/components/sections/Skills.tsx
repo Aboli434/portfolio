@@ -4,20 +4,24 @@ import { motion } from "framer-motion";
 
 const skillCategories = [
   {
-    title: "Frontend Engineering",
-    skills: ["React", "Next.js", "TypeScript", "JavaScript (ES6+)", "Tailwind CSS", "HTML5/CSS3"]
+    title: "Core Frontend & Architecture",
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Responsive UI"],
+    demonstratedIn: "Wedora, Aasamant, Fashion Designer"
   },
   {
-    title: "Interaction, Motion & 3D",
-    skills: ["Framer Motion", "React Three Fiber", "Three.js", "GSAP", "Responsive Design", "Figma"]
+    title: "Interaction & Motion",
+    skills: ["Framer Motion", "GSAP", "CSS Animations", "Smooth Scrolling"],
+    demonstratedIn: "Fashion Designer, PRANSH"
   },
   {
-    title: "Backend & APIs",
-    skills: ["Node.js", "Fastify", "REST APIs", "OpenAI API", "State Management", "Data Architecture"]
+    title: "Full-Stack & APIs",
+    skills: ["Node.js", "Fastify", "REST APIs", "OpenAI API Integration"],
+    demonstratedIn: "IntentFlow"
   },
   {
-    title: "Tools & Deployment",
-    skills: ["Git", "GitHub", "Vercel", "npm/pnpm", "ESLint", "Prettier"]
+    title: "3D & WebGL",
+    skills: ["React Three Fiber", "Three.js", "3D Optimization"],
+    demonstratedIn: "PRANSH, Portfolio Hero"
   }
 ];
 
@@ -52,7 +56,7 @@ export default function Skills() {
             className="lg:max-w-xs"
           >
             <p className="text-foreground-muted font-sans font-light text-sm leading-relaxed">
-              A curated selection of the technologies and frameworks I use to engineer robust, interactive digital experiences.
+              My core competencies, grouped by discipline and linked directly to the work that demonstrates them.
             </p>
           </motion.div>
         </div>
@@ -77,13 +81,20 @@ export default function Skills() {
                 </span>
               </div>
               
-              <ul className="grid grid-cols-2 gap-y-4 gap-x-4">
+              <ul className="grid grid-cols-2 gap-y-4 gap-x-4 mb-6">
                 {category.skills.map(skill => (
                   <li key={skill} className="text-foreground font-sans font-light text-sm hover:text-primary transition-colors duration-300">
                     {skill}
                   </li>
                 ))}
               </ul>
+              
+              <div className="mt-auto pt-4 border-t border-foreground/5">
+                <p className="text-xs font-sans text-foreground-muted">
+                  <span className="uppercase tracking-widest text-[9px] mr-2 text-primary">Demonstrated in:</span>
+                  {category.demonstratedIn}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
