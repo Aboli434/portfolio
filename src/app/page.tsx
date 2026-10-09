@@ -23,6 +23,9 @@ export default function Home() {
 
   return (
     <main className="relative w-full min-h-screen bg-background text-foreground font-sans selection:bg-accent/20 selection:text-accent">
+      <a href="#about" className="absolute left-0 top-0 -translate-y-full focus:translate-y-0 bg-primary text-white p-3 z-[100] transition-transform">
+        Skip to main content
+      </a>
       
       {/* GLOBAL NAVIGATION */}
       <div className={phase === 'project' ? 'hidden' : 'block'}>
@@ -33,7 +36,7 @@ export default function Home() {
       <section id="home" className="relative w-full h-[100svh] bg-background overflow-hidden">
         {/* 3D Background */}
         {phase !== 'project' && (
-          <div className={`absolute inset-0 z-0 ${phase === 'universe' ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+          <div aria-hidden="true" className={`absolute inset-0 z-0 ${phase === 'universe' ? 'pointer-events-auto' : 'pointer-events-none'}`}>
             <Scene />
           </div>
         )}

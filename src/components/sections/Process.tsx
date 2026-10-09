@@ -27,7 +27,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 md:py-40 bg-background relative overflow-hidden">
+    <section id="process" className="py-24 md:py-40 bg-background relative overflow-hidden scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
         
         {/* Editorial Section Header */}
@@ -73,7 +73,7 @@ export default function Process() {
               className="flex flex-col gap-6 relative"
             >
               <div className="flex flex-col gap-2">
-                <span className="text-[10px] font-sans text-primary tracking-[0.2em]">STEP 0{idx + 1}</span>
+                <span className="text-xs font-sans text-primary tracking-[0.2em] whitespace-nowrap">STEP 0{idx + 1}</span>
                 <div className="w-full h-[1px] bg-foreground/10 relative">
                   <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-primary"></div>
                 </div>

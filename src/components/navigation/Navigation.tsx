@@ -5,10 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { id: "01", name: "ABOUT", href: "#about" },
-  { id: "02", name: "SKILLS", href: "#skills" },
-  { id: "03", name: "PROJECTS", href: "#projects" },
-  { id: "04", name: "EXPERIENCE", href: "#experience" },
-  { id: "05", name: "CONTACT", href: "#contact" },
+  { id: "02", name: "SERVICES", href: "#services" },
+  { id: "03", name: "PROCESS", href: "#process" },
+  { id: "04", name: "PROJECTS", href: "#projects" },
+  { id: "05", name: "SKILLS", href: "#skills" },
+  { id: "06", name: "EXPERIENCE", href: "#experience" },
+  { id: "07", name: "CONTACT", href: "#contact" },
 ];
 
 export default function Navigation() {
@@ -49,8 +51,10 @@ export default function Navigation() {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
   }, [isOpen]);
 

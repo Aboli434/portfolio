@@ -222,16 +222,23 @@ export default function ProjectUniverse() {
   const { phase } = useStore();
   const groupRef = useRef<THREE.Group>(null);
   
-  // Arrange projects in a semi-circle or diamond
-  const positions: [number, number, number][] = [
-    [-8, 0, -5], // IntentFlow
-    [-4, 2, -8], // Wedora
-    [0, -2, -6], // Pransh
-    [4, 1, -4],  // Aasamant
-    [8, -1, -5], // Fashion
-  ];
-  
-  const Visuals = [IntentFlowVisual, WedoraVisual, PranshVisual, AasamantVisual, FashionVisual];
+  // Map visuals by ID so they stay correct when projects array is reordered
+  const visualMap: Record<string, React.FC<{ hovered: boolean }>> = {
+    'intentflow': IntentFlowVisual,
+    'wedora': WedoraVisual,
+    'pransh': PranshVisual,
+    'aasamant': AasamantVisual,
+    'fashion': FashionVisual
+  };
+
+  // Map positions by ID to maintain the constellation shape
+  const positionMap: Record<string, [number, number, number]> = {
+    'intentflow': [-8, 0, -5],
+    'wedora': [-4, 2, -8],
+    'pransh': [0, -2, -6],
+    'aasamant': [4, 1, -4],
+    'fashion': [8, -1, -5]
+  };
 
   // Subtle rotation of the whole universe
   useFrame((state) => {
@@ -241,19 +248,24 @@ export default function ProjectUniverse() {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -10]}>
-      {projects.map((project, idx) => (
-        <ProjectNode 
-          key={project.id} 
-          project={project} 
-          position={positions[idx]} 
-          VisualComponent={Visuals[idx]} 
-        />
-      ))}
+    // Shift the universe group slightly to the right (x=3) to prevent overlap with left-aligned hero text
+    <group ref={groupRef} position={[3, 0, -10]}>
+      {projects.map((project) => {
+        const VisualComponent = visualMap[project.id];
+        const position = positionMap[project.id] || [0,0,0];
+        return (
+          <ProjectNode 
+            key={project.id} 
+            project={project} 
+            position={position} 
+            VisualComponent={VisualComponent} 
+          />
+        );
+      })}
       
       {/* Connecting lines for the "universe" feel */}
       <Line
-        points={[positions[0], positions[1], positions[3], positions[2], positions[0]]}
+        points={[positionMap['intentflow'], positionMap['wedora'], positionMap['aasamant'], positionMap['pransh'], positionMap['intentflow']]}
         color="#FFF0B3"
         opacity={0.1}
         transparent

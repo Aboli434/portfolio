@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 md:py-40 bg-background relative overflow-hidden">
+    <section id="experience" className="py-24 md:py-40 bg-background relative overflow-hidden scroll-mt-24">
       <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
         
         {/* Editorial Section Header */}

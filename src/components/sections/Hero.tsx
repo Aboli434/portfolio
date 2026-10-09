@@ -24,7 +24,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
-            <span className="text-foreground-muted text-[10px] tracking-[0.2em] uppercase font-sans">N° 01</span>
+            <span className="text-foreground-muted text-xs tracking-[0.2em] uppercase font-sans">N° 01</span>
             <span className="w-12 h-px bg-foreground/30"></span>
             <span className="text-foreground tracking-[0.4em] text-xs font-medium uppercase font-sans">
               Frontend Developer
@@ -68,7 +68,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
 
             <button 
               onClick={onStart}
-              className="text-[10px] tracking-[0.2em] uppercase font-sans text-foreground-muted hover:text-foreground transition-colors relative group"
+              className="text-xs tracking-[0.2em] uppercase font-sans text-foreground-muted hover:text-foreground transition-colors relative group"
             >
               Explore Selected Work
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full"></span>
@@ -80,7 +80,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
         <div className="hidden lg:block relative h-full">
            {/* Vertical label text */}
            <motion.div 
-             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-90 origin-center text-[9px] tracking-[0.4em] text-foreground-muted uppercase font-sans whitespace-nowrap"
+             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-90 origin-center text-xs tracking-[0.4em] text-foreground-muted uppercase font-sans whitespace-nowrap"
              initial={{ opacity: 0 }}
              animate={{ opacity: 1 }}
              transition={{ duration: 2, delay: 1.5 }}
@@ -98,7 +98,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
       >
-        <span className="text-[9px] tracking-[0.3em] text-foreground-muted uppercase font-sans writing-vertical-rl rotate-180">Scroll</span>
+        <span className="text-xs tracking-[0.3em] text-foreground-muted uppercase font-sans writing-vertical-rl rotate-180">Scroll</span>
         <div className="w-[1px] h-12 bg-foreground/20 overflow-hidden relative">
           <motion.div 
             className="w-full h-1/2 bg-foreground absolute top-0"
