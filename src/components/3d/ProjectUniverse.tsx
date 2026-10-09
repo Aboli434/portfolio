@@ -164,10 +164,10 @@ function ProjectNode({
         <Text
           position={[0, -2, 0]}
           fontSize={0.4}
-          color="#ffffff"
+          color="#35251E"
           anchorX="center"
           anchorY="middle"
-          fillOpacity={isHovered ? 1 : 0.4}
+          fillOpacity={isHovered ? 1 : 0.6}
           letterSpacing={0.1}
         >
           {project.name.toUpperCase()}
@@ -177,7 +177,7 @@ function ProjectNode({
         <Text
           position={[0, -2.5, 0]}
           fontSize={0.15}
-          color="#aaaaaa"
+          color="#806B5D"
           anchorX="center"
           anchorY="middle"
           fillOpacity={isHovered ? 1 : 0}
@@ -191,19 +191,47 @@ function ProjectNode({
   );
 }
 
+// Fashion Designer -> Sleek abstract geometric form
+function FashionVisual({ hovered }: { hovered: boolean }) {
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
+      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      const scale = THREE.MathUtils.lerp(groupRef.current.scale.x, hovered ? 1.1 : 0.9, 0.1);
+      groupRef.current.scale.set(scale, scale, scale);
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      <mesh>
+        <octahedronGeometry args={[1, 0]} />
+        <meshStandardMaterial color="#702C3B" metalness={0.8} roughness={0.2} wireframe={!hovered} emissive="#702C3B" emissiveIntensity={hovered ? 0.3 : 0} />
+      </mesh>
+      <mesh rotation={[0, Math.PI / 4, 0]}>
+        <boxGeometry args={[1.5, 0.05, 1.5]} />
+        <meshStandardMaterial color="#B69A62" metalness={1} roughness={0.1} />
+      </mesh>
+    </group>
+  );
+}
+
 export default function ProjectUniverse() {
   const { phase } = useStore();
   const groupRef = useRef<THREE.Group>(null);
   
   // Arrange projects in a semi-circle or diamond
   const positions: [number, number, number][] = [
-    [-6, 0, -5], // IntentFlow
-    [-2, 2, -8], // Wedora
-    [2, -2, -6], // Pransh
-    [6, 1, -4],  // Aasamant
+    [-8, 0, -5], // IntentFlow
+    [-4, 2, -8], // Wedora
+    [0, -2, -6], // Pransh
+    [4, 1, -4],  // Aasamant
+    [8, -1, -5], // Fashion
   ];
   
-  const Visuals = [IntentFlowVisual, WedoraVisual, PranshVisual, AasamantVisual];
+  const Visuals = [IntentFlowVisual, WedoraVisual, PranshVisual, AasamantVisual, FashionVisual];
 
   // Subtle rotation of the whole universe
   useFrame((state) => {
@@ -226,8 +254,8 @@ export default function ProjectUniverse() {
       {/* Connecting lines for the "universe" feel */}
       <Line
         points={[positions[0], positions[1], positions[3], positions[2], positions[0]]}
-        color="#ffffff"
-        opacity={0.05}
+        color="#FFF0B3"
+        opacity={0.1}
         transparent
         lineWidth={1}
       />

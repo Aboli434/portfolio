@@ -1,133 +1,159 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { projects } from "@/data/projects";
 import { SpeechService } from "@/lib/speechService";
+import { useEffect } from "react";
+
+// Project Components
+import IntentFlow from "../projects/IntentFlow";
+import Wedora from "../projects/Wedora";
+import Pransh from "../projects/Pransh";
+import Aasamant from "../projects/Aasamant";
+import Fashion from "../projects/Fashion";
 
 export default function ProjectDetail() {
-  const { activeProjectId, setPhase, setActiveProject } = useStore();
+  const { activeProjectId, setPhase, setActiveProject, setAiStatus, setAiSubtitle, aiStatus } = useStore();
   const project = projects.find(p => p.id === activeProjectId);
+
+  // Auto-play narration when project opens
+  useEffect(() => {
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+
+    if (project && project.aiNarration) {
+      const svc = SpeechService.getInstance();
+      svc.stop(); // Stop any existing speech
+      
+      const n = project.aiNarration;
+      const text = `${n.intro} ${n.problem} ${n.approach} ${n.role}`;
+      setAiSubtitle(text);
+      setAiStatus('speaking');
+      
+      svc.speak(text, () => {
+        setAiStatus('idle');
+        setTimeout(() => {
+          if (useStore.getState().aiStatus === 'idle') setAiSubtitle(null);
+        }, 3000);
+      });
+    }
+    
+    return () => {
+      // Restore body scroll
+      document.body.style.overflow = '';
+      
+      // Cleanup on unmount (back to universe)
+      SpeechService.getInstance().stop();
+      setAiStatus('idle');
+      setAiSubtitle(null);
+    };
+  }, [project?.id]); // Only re-run when project ID changes
 
   if (!project) return null;
 
   const handleBack = () => {
+    SpeechService.getInstance().stop();
+    setAiStatus('idle');
+    setAiSubtitle(null);
     setActiveProject(null);
+    // After state clears, scroll to the projects section
+    requestAnimationFrame(() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  };
+
+  const renderProjectComponent = () => {
+    switch (project.id) {
+      case 'intentflow': return <IntentFlow project={project} />;
+      case 'wedora': return <Wedora project={project} />;
+      case 'pransh': return <Pransh project={project} />;
+      case 'aasamant': return <Aasamant project={project} />;
+      case 'fashion': return <Fashion project={project} />;
+      default: return null;
+    }
   };
 
   return (
     <motion.div 
-      className="absolute inset-0 flex items-center justify-end pointer-events-auto p-8 md:p-16 z-20"
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 100, transition: { duration: 0.5, ease: "easeIn" } }}
-      transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+      className="fixed inset-0 z-[100] flex flex-col pointer-events-auto bg-background text-foreground overflow-y-auto"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 30, transition: { duration: 0.3, ease: "easeIn" } }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="w-full md:w-1/2 lg:w-1/3 h-full flex flex-col justify-center gap-8">
+      <div className="w-full min-h-screen flex flex-col relative container mx-auto px-6 md:px-12 max-w-6xl py-8">
         
-        <button 
-          onClick={handleBack}
-          className="self-start text-xs tracking-[0.2em] uppercase font-medium hover:text-white/70 transition-colors flex items-center gap-3 group"
-        >
-          <div className="w-8 h-px bg-white group-hover:w-12 transition-all duration-300" />
-          <span>BACK TO UNIVERSE</span>
-        </button>
+        {/* Header / Nav */}
+        <div className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-8 py-4 md:py-5 bg-background border-b border-foreground/5">
+          <button 
+            onClick={handleBack}
+            className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-medium hover:text-primary text-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded transition-colors flex items-center gap-3 group"
+          >
+            <div className="w-6 sm:w-8 h-px bg-foreground/70 group-hover:bg-primary group-hover:w-12 transition-all duration-300 motion-reduce:transition-none" />
+            <span>BACK TO PROJECTS</span>
+          </button>
 
-        <div className="space-y-6 max-h-[70vh] overflow-y-auto pr-4 custom-scrollbar">
-          <div>
-            <h1 className="font-display text-5xl md:text-6xl font-medium tracking-tight uppercase leading-[0.9] text-white mb-4">
-              {project.name}
-            </h1>
-            <p className="text-lg text-white/70 font-light leading-relaxed">
-              {project.description}
-            </p>
+          {/* Narration Controls */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <span className="text-[10px] tracking-[0.2em] font-medium uppercase text-muted hidden sm:block">
+              NARRATION
+            </span>
+            <button 
+              onClick={() => {
+                const svc = SpeechService.getInstance();
+                svc.stop();
+                const n = project.aiNarration;
+                if (n) {
+                  const text = `${n.intro} ${n.problem} ${n.approach} ${n.role}`;
+                  setAiSubtitle(text);
+                  setAiStatus('speaking');
+                  svc.speak(text, () => {
+                    setAiStatus('idle');
+                    setTimeout(() => {
+                      if (useStore.getState().aiStatus === 'idle') setAiSubtitle(null);
+                    }, 3000);
+                  });
+                }
+              }}
+              className="text-[10px] uppercase tracking-widest text-foreground/60 hover:text-primary focus:outline-none focus:text-primary transition-colors"
+            >
+              REPLAY
+            </button>
+            <button 
+              onClick={() => {
+                SpeechService.getInstance().stop();
+                setAiStatus('idle');
+                setAiSubtitle(null);
+              }}
+              className="text-[10px] uppercase tracking-widest text-foreground/60 hover:text-primary focus:outline-none focus:text-primary transition-colors"
+            >
+              STOP
+            </button>
           </div>
+        </div>
 
-          <div className="h-px w-full bg-white/10" />
+        {/* Project Content */}
+        <div className="flex-1 p-6 md:p-8 pt-6">
+          {renderProjectComponent()}
 
-          <div className="space-y-4">
-            <h3 className="text-xs tracking-[0.2em] text-white/40 font-medium">THE PROBLEM</h3>
-            <p className="text-sm text-white/80 font-light leading-relaxed">
-              {project.problem}
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-xs tracking-[0.2em] text-white/40 font-medium">THE IDEA</h3>
-            <p className="text-sm text-white/80 font-light leading-relaxed">
-              {project.idea}
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-xs tracking-[0.2em] text-white/40 font-medium">MY ROLE</h3>
-            <p className="text-sm text-white/80 font-light leading-relaxed">
-              {project.role}
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-xs tracking-[0.2em] text-white/40 font-medium">TECHNOLOGIES</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map(tech => (
-                <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 text-xs text-white/70">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4 pb-10">
-            <div className="flex flex-wrap gap-4 pt-4 items-center">
-              {project.liveUrl && (
-                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="px-6 py-3 bg-white text-black font-medium text-xs tracking-[0.2em] uppercase hover:bg-white/90 transition-colors pointer-events-auto">
-                  EXPLORE LIVE
-                </a>
-              )}
-              {project.githubUrl && (
-                <a href={project.githubUrl} target="_blank" rel="noreferrer" className="px-6 py-3 border border-white/20 text-white font-medium text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-colors pointer-events-auto">
-                  VIEW CODE
-                </a>
-              )}
-            </div>
-            
-            <div className="flex items-center gap-4 pt-6 border-t border-white/10 mt-6">
-              <span className="text-[10px] tracking-[0.2em] font-medium uppercase text-white/40">
-                NARRATION
-              </span>
-              <button 
-                onClick={() => {
-                  const store = useStore.getState();
-                  const svc = SpeechService.getInstance();
-                  const n = project.aiNarration;
-                  if (n) {
-                    const text = `${n.intro} ${n.problem} ${n.approach} ${n.role} ${n.technologies} ${n.technicalHighlight}`;
-                    store.setAiSubtitle(text);
-                    store.setAiStatus('speaking');
-                    svc.speak(text, () => {
-                      store.setAiStatus('idle');
-                      setTimeout(() => {
-                        if (useStore.getState().aiStatus === 'idle') store.setAiSubtitle(null);
-                      }, 3000);
-                    });
-                  }
-                }}
-                className="text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors pointer-events-auto"
-              >
-                REPLAY
-              </button>
-              <button 
-                onClick={() => {
-                  const store = useStore.getState();
-                  SpeechService.getInstance().stop();
-                  store.setAiStatus('idle');
-                  store.setAiSubtitle(null);
-                }}
-                className="text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors pointer-events-auto"
-              >
-                STOP
-              </button>
-            </div>
+          {/* External Links Footer */}
+          <div className="mt-12 pt-8 border-t border-foreground/10 flex flex-col sm:flex-row gap-6 pb-8">
+            {project.liveUrl && (
+              <a href={project.liveUrl} target="_blank" rel="noreferrer" className="group flex items-center gap-4 text-[10px] tracking-[0.3em] font-sans text-foreground uppercase transition-colors hover:text-primary w-fit">
+                <span className="w-6 h-[1px] bg-foreground group-hover:bg-primary transition-colors"></span>
+                EXPLORE LIVE
+              </a>
+            )}
+            {project.githubUrl && (
+              <a href={project.githubUrl} target="_blank" rel="noreferrer" className="group flex items-center gap-4 text-[10px] tracking-[0.3em] font-sans text-foreground uppercase transition-colors hover:text-primary w-fit">
+                <span className="w-6 h-[1px] bg-foreground group-hover:bg-primary transition-colors"></span>
+                VIEW CODE
+              </a>
+            )}
           </div>
         </div>
       </div>

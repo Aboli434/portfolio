@@ -5,55 +5,108 @@ import { motion } from "framer-motion";
 export default function Hero({ onStart }: { onStart: () => void }) {
   return (
     <motion.div 
-      className="absolute inset-0 flex flex-col items-center justify-center pointer-events-auto"
+      className="absolute inset-0 flex flex-col justify-center pointer-events-none"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 1.5, ease: "easeInOut" } }}
     >
-      <div className="text-center flex flex-col items-center relative z-20 px-6 max-w-4xl w-full">
-        <motion.p
-          className="text-white/50 tracking-[0.3em] text-xs font-medium mb-6 uppercase"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-        >
-          Frontend Developer
-        </motion.p>
-
-        <motion.h1 
-          className="font-display text-[15vw] md:text-[180px] font-medium tracking-tight uppercase leading-[0.8] text-white mix-blend-plus-lighter mb-8"
-          initial={{ y: 60, opacity: 0, scale: 0.95 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
-          transition={{ duration: 1.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{ textShadow: "0 20px 40px rgba(0,0,0,0.5)" }}
-        >
-          ABOLI
-        </motion.h1>
-
-        <motion.p 
-          className="text-base md:text-xl text-white/70 max-w-lg mx-auto mb-16 font-light leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 1.2, ease: "easeOut" }}
-        >
-          Building digital experiences where design, interaction and technology meet.
-        </motion.p>
-
-        <motion.div 
-          className="flex flex-col sm:flex-row gap-6 items-center w-full sm:w-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.6 }}
-        >
-          <button 
-            onClick={onStart}
-            className="w-full sm:w-auto px-10 py-5 bg-white text-black font-medium text-xs tracking-[0.2em] uppercase hover:scale-105 transition-transform duration-500 ease-out relative group overflow-hidden pointer-events-auto"
+      {/* Editorial decorative lines */}
+      <div className="absolute top-0 bottom-0 left-[10%] w-[1px] bg-foreground/10 z-0"></div>
+      
+      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] relative z-20 h-full items-center">
+        
+        {/* Left side: Editorial Typography */}
+        <div className="flex flex-col items-start text-left pointer-events-auto pl-[4%]">
+          
+          <motion.div
+            className="flex items-center gap-6 mb-8"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
-            <span className="relative z-10">ENTER MY WORLD</span>
-            <div className="absolute inset-0 bg-neutral-200 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-          </button>
-        </motion.div>
+            <span className="text-foreground-muted text-[10px] tracking-[0.2em] uppercase font-sans">N° 01</span>
+            <span className="w-12 h-px bg-foreground/30"></span>
+            <span className="text-foreground tracking-[0.4em] text-xs font-medium uppercase font-sans">
+              Frontend Developer
+            </span>
+          </motion.div>
+
+          <motion.h1 
+            className="font-display text-7xl sm:text-8xl md:text-[10rem] font-medium tracking-tight leading-[0.85] text-foreground mb-12 relative"
+            initial={{ y: 60, opacity: 0, scale: 0.98 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 1.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Aboli<span className="text-primary italic pr-2">.</span>
+          </motion.h1>
+
+          <motion.div 
+            className="flex gap-6 items-start max-w-md mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 1.0, ease: "easeOut" }}
+          >
+            <div className="w-[2px] h-full bg-burgundy/60 mt-1 min-h-[60px]"></div>
+            <p className="text-base text-foreground-muted font-sans font-light leading-relaxed tracking-wide">
+              Crafting digital experiences where sophisticated design, fluid motion, and robust engineering converge into something unforgettable.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="flex items-center gap-8 mt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.4 }}
+          >
+            <button 
+              onClick={onStart}
+              className="group relative flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-foreground uppercase hover:text-primary transition-colors duration-500"
+            >
+              <span className="w-6 h-[1px] bg-foreground group-hover:bg-primary transition-colors duration-500"></span>
+              Explore My Work
+            </button>
+
+            <a 
+              href="#contact"
+              className="text-[10px] tracking-[0.2em] uppercase font-sans text-foreground-muted hover:text-foreground transition-colors relative group"
+            >
+              Get In Touch
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full"></span>
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Right side: Portrait Space */}
+        <div className="hidden lg:block relative h-full">
+           {/* Vertical label text */}
+           <motion.div 
+             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-90 origin-center text-[9px] tracking-[0.4em] text-foreground-muted uppercase font-sans whitespace-nowrap"
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             transition={{ duration: 2, delay: 1.5 }}
+           >
+             Interactive Web Experience — 2026
+           </motion.div>
+        </div>
+
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 pointer-events-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
+        <span className="text-[9px] tracking-[0.3em] text-foreground-muted uppercase font-sans writing-vertical-rl rotate-180">Scroll</span>
+        <div className="w-[1px] h-12 bg-foreground/20 overflow-hidden relative">
+          <motion.div 
+            className="w-full h-1/2 bg-foreground absolute top-0"
+            animate={{ top: ["-50%", "100%"] }}
+            transition={{ duration: 2, ease: "linear", repeat: Infinity }}
+          />
+        </div>
+      </motion.div>
     </motion.div>
   );
 }

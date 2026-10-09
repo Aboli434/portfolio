@@ -52,9 +52,7 @@ export default function AINarrator() {
   };
 
   useEffect(() => {
-    if (phase === 'hero') {
-      startNarration(portfolioKnowledge.heroNarration);
-    } else if (phase === 'universe') {
+    if (phase === 'universe' || phase === 'hero') {
       speechService.stop();
       currentSpeechRef.current = null;
       setAiStatus('idle');
@@ -92,7 +90,7 @@ export default function AINarrator() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             </div>
             <span className="text-[10px] tracking-[0.2em] font-medium uppercase text-white/50">
-              ABOLI&apos;S GUIDE
+              ABOLI
             </span>
           </div>
           <p className="text-sm md:text-base text-white/90 font-light leading-relaxed text-left">

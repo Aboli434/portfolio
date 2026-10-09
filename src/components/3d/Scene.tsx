@@ -79,17 +79,6 @@ function StudioEnvironment() {
 
   return (
     <group ref={groupRef} position={[0, 0, 0]}>
-      {/* Monolith 1 */}
-      <mesh position={[-8, 0, -10]} rotation={[0, Math.PI / 4, 0]}>
-        <boxGeometry args={[3, 20, 3]} />
-        <meshStandardMaterial color="#111115" roughness={0.2} metalness={0.8} />
-      </mesh>
-      
-      {/* Monolith 2 */}
-      <mesh position={[8, -2, -15]} rotation={[0, -Math.PI / 6, 0]}>
-        <boxGeometry args={[4, 25, 4]} />
-        <meshStandardMaterial color="#0a0a0c" roughness={0.1} metalness={0.9} />
-      </mesh>
     </group>
   );
 }
@@ -97,23 +86,22 @@ function StudioEnvironment() {
 export default function Scene() {
   return (
     <Canvas dpr={[1, 2]} gl={{ antialias: true, alpha: false, toneMapping: THREE.ACESFilmicToneMapping }}>
-      <color attach="background" args={["#050507"]} />
-      <fogExp2 attach="fog" args={["#050507", 0.02]} />
+      <color attach="background" args={["#FFF8E8"]} />
+      <fogExp2 attach="fog" args={["#FFF8E8", 0.02]} />
       
       <CinematicCamera />
       
-      <ambientLight intensity={0.2} />
-      <spotLight position={[10, 20, 10]} angle={0.15} penumbra={1} intensity={2} color="#ffffff" castShadow />
-      <pointLight position={[-10, -10, -10]} intensity={1} color="#222233" />
+      <ambientLight intensity={0.6} color="#FFF8E8" />
+      <spotLight position={[10, 20, 10]} angle={0.2} penumbra={1} intensity={3} color="#FFF0B3" castShadow />
+      <pointLight position={[-10, -10, -10]} intensity={2} color="#D96C32" />
 
       <StudioEnvironment />
       <ProjectUniverse />
       <AIVisual />
       
-      <Stars radius={50} depth={50} count={1500} factor={2} saturation={0} fade speed={0.5} />
-      <Sparkles count={80} scale={25} size={1.5} speed={0.2} opacity={0.1} color="#ffffff" />
+      <Sparkles count={150} scale={25} size={2} speed={0.2} opacity={0.4} color="#D96C32" />
       
-      <DreiEnvironment preset="city" />
+      <DreiEnvironment preset="studio" />
     </Canvas>
   );
 }
