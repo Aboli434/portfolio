@@ -1,10 +1,38 @@
 "use client";
 
+import { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 import { motion } from "framer-motion";
+
+function ContactAccent() {
+  const meshRef = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
+      meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} position={[0, 0, 0]} scale={1.5}>
+      <octahedronGeometry args={[1, 0]} />
+      <meshBasicMaterial color="#B69A62" wireframe transparent opacity={0.15} />
+    </mesh>
+  );
+}
 
 export default function Contact() {
   return (
     <section id="contact" className="py-24 md:py-40 bg-section relative overflow-hidden scroll-mt-24">
+      {/* 3D Accent */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 5] }}>
+          <ContactAccent />
+        </Canvas>
+      </div>
+
       <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -15,7 +43,7 @@ export default function Contact() {
         >
           <div className="flex items-center gap-4 mb-12">
             <span className="w-12 h-px bg-primary/40"></span>
-            <span className="text-[9px] tracking-[0.3em] font-sans text-primary uppercase">N° 08 — Connect</span>
+            <span className="text-xs tracking-[0.3em] font-sans text-primary uppercase">N° 08 — Connect</span>
             <span className="w-12 h-px bg-primary/40"></span>
           </div>
           
@@ -33,7 +61,7 @@ export default function Contact() {
               href="mailto:abolirisbud434@gmail.com" 
               className="group relative flex flex-col items-center gap-2"
             >
-              <span className="text-[10px] tracking-[0.3em] font-sans text-foreground-muted uppercase">Email</span>
+              <span className="text-xs tracking-[0.3em] font-sans text-foreground-muted uppercase">Email</span>
               <span className="font-display text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors duration-300 break-all">abolirisbud434@gmail.com</span>
               <span className="absolute -bottom-2 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300"></span>
             </a>
@@ -43,7 +71,7 @@ export default function Contact() {
               target="_blank" rel="noopener noreferrer"
               className="group relative flex flex-col items-center gap-2"
             >
-              <span className="text-[10px] tracking-[0.3em] font-sans text-foreground-muted uppercase">Network</span>
+              <span className="text-xs tracking-[0.3em] font-sans text-foreground-muted uppercase">Network</span>
               <span className="font-display text-2xl text-foreground group-hover:text-primary transition-colors duration-300">LinkedIn</span>
               <span className="absolute -bottom-2 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300"></span>
             </a>
@@ -53,7 +81,7 @@ export default function Contact() {
               target="_blank" rel="noopener noreferrer"
               className="group relative flex flex-col items-center gap-2"
             >
-              <span className="text-[10px] tracking-[0.3em] font-sans text-foreground-muted uppercase">Code</span>
+              <span className="text-xs tracking-[0.3em] font-sans text-foreground-muted uppercase">Code</span>
               <span className="font-display text-2xl text-foreground group-hover:text-primary transition-colors duration-300">GitHub</span>
               <span className="absolute -bottom-2 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300"></span>
             </a>

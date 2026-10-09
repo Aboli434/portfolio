@@ -240,16 +240,20 @@ export default function ProjectUniverse() {
     'fashion': [8, -1, -5]
   };
 
-  // Subtle rotation of the whole universe
+  // Subtle rotation of the whole universe and scale up on mount
   useFrame((state) => {
     if (groupRef.current && phase === 'universe') {
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.5;
+      groupRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.05);
+    } else if (groupRef.current && phase !== 'universe') {
+      groupRef.current.scale.lerp(new THREE.Vector3(0, 0, 0), 0.1);
     }
   });
 
   return (
     // Shift the universe group slightly to the right (x=3) to prevent overlap with left-aligned hero text
-    <group ref={groupRef} position={[3, 0, -10]}>
+    // Start scale at 0 so it scales up smoothly
+    <group ref={groupRef} position={[3, 0, -10]} scale={0}>
       {projects.map((project) => {
         const VisualComponent = visualMap[project.id];
         const position = positionMap[project.id] || [0,0,0];

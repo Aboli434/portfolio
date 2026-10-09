@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { gsap } from "gsap";
 import { useStore } from "@/lib/store";
 import ProjectUniverse from "./ProjectUniverse";
+import HeroFocalElement from "./HeroFocalElement";
 import AIVisual from "./AIVisual";
 
 function CinematicCamera() {
@@ -84,6 +85,8 @@ function StudioEnvironment() {
 }
 
 export default function Scene() {
+  const { phase } = useStore();
+  
   return (
     <Canvas dpr={[1, 2]} gl={{ antialias: true, alpha: false, toneMapping: THREE.ACESFilmicToneMapping }}>
       <color attach="background" args={["#FFF8E8"]} />
@@ -96,7 +99,13 @@ export default function Scene() {
       <pointLight position={[-10, -10, -10]} intensity={2} color="#D96C32" />
 
       <StudioEnvironment />
+      
+      {/* 3D Focal element for the Hero phase */}
+      <HeroFocalElement />
+
+      {/* Interactive project selection for universe phase */}
       <ProjectUniverse />
+      
       <AIVisual />
       
       <Sparkles count={150} scale={25} size={2} speed={0.2} opacity={0.4} color="#D96C32" />

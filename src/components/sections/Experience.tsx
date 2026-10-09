@@ -16,9 +16,9 @@ export default function Experience() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex items-center gap-4 mb-10">
-              <span className="text-[9px] tracking-[0.3em] font-sans text-foreground-muted uppercase">N° 07</span>
+              <span className="text-xs tracking-[0.3em] font-sans text-foreground-muted uppercase">N° 07</span>
               <span className="w-16 h-px bg-foreground/20"></span>
-              <span className="text-[9px] tracking-[0.3em] font-sans text-foreground uppercase">Background</span>
+              <span className="text-xs tracking-[0.3em] font-sans text-foreground uppercase">Background</span>
             </div>
             <h2 className="font-display text-5xl md:text-6xl font-light tracking-tight text-foreground leading-[1.1]">
               Experience &amp; <span className="italic text-primary">Education</span>.
@@ -37,12 +37,25 @@ export default function Experience() {
           >
             <h3 className="font-sans text-xs tracking-[0.3em] text-foreground-muted uppercase border-b border-foreground/10 pb-6 mb-10">Freelance &amp; Project Work</h3>
             
-            <div className="relative pl-6 border-l border-foreground/10 mb-12">
-              <div className="absolute top-1 -left-[3px] w-[5px] h-[5px] bg-primary rounded-full"></div>
+            <div className="relative pl-6 mb-12">
+              <motion.div 
+                className="absolute left-0 top-0 w-[1px] bg-foreground/10"
+                initial={{ height: "0%" }}
+                whileInView={{ height: "100%" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 1.5, delay: 0.4 }}
+              />
+              <motion.div 
+                className="absolute top-1 -left-[2px] w-[5px] h-[5px] bg-primary rounded-full"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              />
               
               <div className="mb-4 flex items-center justify-between">
-                <p className="font-sans text-[10px] tracking-[0.2em] text-primary uppercase">2023 — Present</p>
-                <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">Pune, IN</p>
+                <p className="font-sans text-xs tracking-[0.2em] text-primary uppercase">2023 — Present</p>
+                <p className="font-sans text-xs tracking-[0.2em] text-foreground-muted uppercase">Pune, IN</p>
               </div>
               
               <h4 className="font-display text-3xl font-medium text-foreground mb-2">Frontend Developer</h4>
@@ -74,12 +87,25 @@ export default function Experience() {
           >
             <h3 className="font-sans text-xs tracking-[0.3em] text-foreground-muted uppercase border-b border-foreground/10 pb-6 mb-10">Education</h3>
             
-            <div className="relative pl-6 border-l border-foreground/10">
-              <div className="absolute top-1 -left-[3px] w-[5px] h-[5px] bg-foreground/30 rounded-full"></div>
+            <div className="relative pl-6">
+              <motion.div 
+                className="absolute left-0 top-0 w-[1px] bg-foreground/10"
+                initial={{ height: "0%" }}
+                whileInView={{ height: "100%" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 1.5, delay: 0.6 }}
+              />
+              <motion.div 
+                className="absolute top-1 -left-[2px] w-[5px] h-[5px] bg-foreground/30 rounded-full"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              />
               
               <div className="mb-4 flex items-center justify-between">
-                <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">2021 — 2025</p>
-                <p className="font-sans text-[10px] tracking-[0.2em] text-foreground-muted uppercase">Pune, IN</p>
+                <p className="font-sans text-xs tracking-[0.2em] text-foreground-muted uppercase">2021 — 2025</p>
+                <p className="font-sans text-xs tracking-[0.2em] text-foreground-muted uppercase">Pune, IN</p>
               </div>
               
               <h4 className="font-display text-3xl font-medium text-foreground mb-2">Bachelor of Engineering</h4>

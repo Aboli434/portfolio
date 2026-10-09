@@ -74,8 +74,21 @@ export default function Process() {
             >
               <div className="flex flex-col gap-2">
                 <span className="text-xs font-sans text-primary tracking-[0.2em] whitespace-nowrap">STEP 0{idx + 1}</span>
-                <div className="w-full h-[1px] bg-foreground/10 relative">
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-primary"></div>
+                <div className="w-full h-[1px] bg-foreground/10 relative overflow-hidden">
+                  <motion.div 
+                    className="absolute left-0 top-0 h-full bg-primary/30"
+                    initial={{ width: "0%" }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 1, delay: idx * 0.15 + 0.3, ease: "easeInOut" }}
+                  />
+                  <motion.div 
+                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-[3px] rounded-full bg-primary"
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: idx * 0.15, ease: "backOut" }}
+                  ></motion.div>
                 </div>
               </div>
               <div>

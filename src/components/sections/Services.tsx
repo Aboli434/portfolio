@@ -54,33 +54,51 @@ export default function Services() {
         </div>
 
         {/* Services List */}
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-12 group/list">
           {services.map((service, idx) => (
             <motion.div 
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col md:flex-row gap-6 md:gap-16 border-b border-foreground/10 pb-12"
+              transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex flex-col md:flex-row gap-6 md:gap-16 border-b border-foreground/10 pb-12 hover:border-primary/50 transition-colors duration-500 relative"
             >
-              <div className="w-full md:w-1/3 flex items-start gap-4">
-                <span className="text-xs font-sans text-foreground-muted tracking-[0.2em] mt-2">
+              {/* Interactive Background Motif */}
+              <div className="absolute left-0 top-0 w-1/3 h-full overflow-hidden pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity duration-700">
+                <motion.div 
+                  className="w-full h-full bg-gradient-to-r from-primary to-transparent"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                />
+              </div>
+
+              <div className="w-full md:w-1/3 flex items-start gap-4 relative z-10">
+                <span className="text-xs font-sans text-foreground-muted tracking-[0.2em] mt-2 group-hover:text-primary transition-colors duration-300">
                   0{idx + 1}
                 </span>
-                <h3 className="font-display text-2xl md:text-3xl text-foreground font-medium tracking-wide">
-                  {service.title}
-                </h3>
+                <div className="flex flex-col">
+                  <h3 className="font-display text-2xl md:text-3xl text-foreground font-medium tracking-wide group-hover:translate-x-2 transition-transform duration-500 ease-out">
+                    {service.title}
+                  </h3>
+                  
+                  {/* Geometric motif that rotates on hover */}
+                  <div className="w-8 h-8 mt-6 border border-foreground/20 rounded-full flex items-center justify-center group-hover:border-primary group-hover:rotate-90 transition-all duration-700">
+                    <div className="w-3 h-[1px] bg-foreground group-hover:bg-primary transition-colors duration-500"></div>
+                  </div>
+                </div>
               </div>
-              <div className="w-full md:w-2/3 flex flex-col items-start gap-6">
-                <p className="text-foreground-muted font-sans font-light text-lg leading-relaxed max-w-2xl">
+              
+              <div className="w-full md:w-2/3 flex flex-col items-start gap-6 relative z-10">
+                <p className="text-foreground-muted font-sans font-light text-lg leading-relaxed max-w-2xl group-hover:text-foreground transition-colors duration-500">
                   {service.description}
                 </p>
                 <a 
                   href="#contact" 
-                  className="group relative flex items-center gap-3 text-[10px] tracking-[0.2em] font-medium text-foreground uppercase hover:text-primary transition-colors duration-500"
+                  className="group/btn relative flex items-center gap-3 text-[10px] tracking-[0.2em] font-medium text-foreground uppercase hover:text-primary transition-colors duration-500 mt-4"
                 >
-                  <span className="w-6 h-[1px] bg-foreground group-hover:bg-primary transition-colors duration-500"></span>
+                  <span className="w-6 h-[1px] bg-foreground group-hover/btn:bg-primary transition-colors duration-500"></span>
                   Enquire about this service
                 </a>
               </div>
