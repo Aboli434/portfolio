@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { projects } from "@/data/projects";
-import { SpeechService } from "@/lib/speechService";
 import { useEffect } from "react";
 
 // Project Components
@@ -14,49 +13,23 @@ import Aasamant from "../projects/Aasamant";
 import Fashion from "../projects/Fashion";
 
 export default function ProjectDetail() {
-  const { activeProjectId, setPhase, setActiveProject, setAiStatus, setAiSubtitle, aiStatus } = useStore();
+  const { activeProjectId, setPhase, setActiveProject } = useStore();
   const project = projects.find(p => p.id === activeProjectId);
 
-  // Auto-play narration when project opens
   useEffect(() => {
     // Lock body scroll
     document.body.style.overflow = 'hidden';
-
-    if (project && project.aiNarration) {
-      const svc = SpeechService.getInstance();
-      svc.stop(); // Stop any existing speech
-      
-      const n = project.aiNarration;
-      const text = `${n.intro} ${n.problem} ${n.approach} ${n.role}`;
-      setAiSubtitle(text);
-      setAiStatus('speaking');
-      
-      svc.speak(text, () => {
-        setAiStatus('idle');
-        setTimeout(() => {
-          if (useStore.getState().aiStatus === 'idle') setAiSubtitle(null);
-        }, 3000);
-      });
-    }
-    
     return () => {
       // Restore body scroll
       document.body.style.overflow = '';
-      
-      // Cleanup on unmount (back to universe)
-      SpeechService.getInstance().stop();
-      setAiStatus('idle');
-      setAiSubtitle(null);
     };
-  }, [project?.id]); // Only re-run when project ID changes
+  }, [project?.id]);
 
   if (!project) return null;
 
   const handleBack = () => {
-    SpeechService.getInstance().stop();
-    setAiStatus('idle');
-    setAiSubtitle(null);
     setActiveProject(null);
+    setPhase('hero'); // or just rely on state
     // After state clears, scroll to the projects section
     requestAnimationFrame(() => {
       const projectsSection = document.getElementById('projects');
@@ -96,44 +69,6 @@ export default function ProjectDetail() {
             <div className="w-6 sm:w-8 h-px bg-foreground/70 group-hover:bg-primary group-hover:w-12 transition-all duration-300 motion-reduce:transition-none" />
             <span>BACK TO PROJECTS</span>
           </button>
-
-          {/* Narration Controls */}
-          <div className="flex items-center gap-3 sm:gap-4">
-            <span className="text-[10px] tracking-[0.2em] font-medium uppercase text-muted hidden sm:block">
-              NARRATION
-            </span>
-            <button 
-              onClick={() => {
-                const svc = SpeechService.getInstance();
-                svc.stop();
-                const n = project.aiNarration;
-                if (n) {
-                  const text = `${n.intro} ${n.problem} ${n.approach} ${n.role}`;
-                  setAiSubtitle(text);
-                  setAiStatus('speaking');
-                  svc.speak(text, () => {
-                    setAiStatus('idle');
-                    setTimeout(() => {
-                      if (useStore.getState().aiStatus === 'idle') setAiSubtitle(null);
-                    }, 3000);
-                  });
-                }
-              }}
-              className="text-[10px] uppercase tracking-widest text-foreground/60 hover:text-primary focus:outline-none focus:text-primary transition-colors"
-            >
-              REPLAY
-            </button>
-            <button 
-              onClick={() => {
-                SpeechService.getInstance().stop();
-                setAiStatus('idle');
-                setAiSubtitle(null);
-              }}
-              className="text-[10px] uppercase tracking-widest text-foreground/60 hover:text-primary focus:outline-none focus:text-primary transition-colors"
-            >
-              STOP
-            </button>
-          </div>
         </div>
 
         {/* Project Content */}

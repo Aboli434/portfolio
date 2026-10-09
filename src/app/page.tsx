@@ -2,11 +2,9 @@
 
 import { useStore } from "@/lib/store";
 import { AnimatePresence } from "framer-motion";
-import Scene from "@/components/3d/Scene";
 import Hero from "@/components/sections/Hero";
 import Navigation from "@/components/navigation/Navigation";
 import ProjectDetail from "@/components/sections/ProjectDetail";
-import AINarrator from "@/components/ai/AINarrator";
 
 // Actual imports for Phase 2 components
 import About from "@/components/sections/About";
@@ -32,32 +30,17 @@ export default function Home() {
         <Navigation />
       </div>
 
-      {/* 3D CINEMATIC HERO */}
+      {/* EDITORIAL HERO */}
       <section id="home" className="relative w-full h-[100svh] bg-background overflow-hidden">
-        {/* 3D Background */}
-        {phase !== 'project' && (
-          <div aria-hidden="true" className={`absolute inset-0 z-0 ${phase === 'universe' ? 'pointer-events-auto' : 'pointer-events-none'}`}>
-            <Scene />
-          </div>
-        )}
-        
-        {/* UI Overlay for Hero */}
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          <AnimatePresence>
-            {phase === 'hero' && (
-              <Hero onStart={() => setPhase('universe')} />
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {phase === 'project' && (
-              <ProjectDetail />
-            )}
-          </AnimatePresence>
-
-          <AINarrator />
-        </div>
+        <Hero />
       </section>
+
+      {/* PROJECT DETAIL OVERLAY */}
+      <AnimatePresence>
+        {phase === 'project' && (
+          <ProjectDetail />
+        )}
+      </AnimatePresence>
 
       {/* SCROLLING CONTENT SECTIONS (Standard DOM) */}
       <div className="relative z-20 bg-background w-full">

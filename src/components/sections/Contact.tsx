@@ -1,38 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
 import { motion } from "framer-motion";
-
-function ContactAccent() {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
-    }
-  });
-
-  return (
-    <mesh ref={meshRef} position={[0, 0, 0]} scale={1.5}>
-      <octahedronGeometry args={[1, 0]} />
-      <meshBasicMaterial color="#B69A62" wireframe transparent opacity={0.15} />
-    </mesh>
-  );
-}
 
 export default function Contact() {
   return (
     <section id="contact" className="py-24 md:py-40 bg-section relative overflow-hidden scroll-mt-24">
-      {/* 3D Accent */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <ContactAccent />
-        </Canvas>
-      </div>
-
       <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

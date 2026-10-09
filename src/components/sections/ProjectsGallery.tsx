@@ -6,7 +6,7 @@ import Image from "next/image";
 import { projects } from "@/data/projects";
 import { useStore } from "@/lib/store";
 
-function ProjectCard({ project, idx, handleCinematicView }: { project: any, idx: number, handleCinematicView: (id: string) => void }) {
+function ProjectCard({ project, idx, handleViewDetails }: { project: any, idx: number, handleViewDetails: (id: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   
   const x = useMotionValue(0);
@@ -52,7 +52,7 @@ function ProjectCard({ project, idx, handleCinematicView }: { project: any, idx:
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="w-full lg:w-3/5 group cursor-pointer relative bg-section/30 rounded-xl p-4 md:p-6 shadow-2xl shadow-black/5" 
-        onClick={() => handleCinematicView(project.id)}
+        onClick={() => handleViewDetails(project.id)}
       >
         <div 
           className="aspect-[4/5] sm:aspect-square lg:aspect-[3/4] relative w-full h-full rounded-lg overflow-hidden"
@@ -85,7 +85,7 @@ function ProjectCard({ project, idx, handleCinematicView }: { project: any, idx:
           style={{ transform: "translateZ(40px)" }}
         >
           <span className="text-white text-xs font-sans tracking-[0.3em] uppercase border-b border-white pb-1">
-            Enter Cinematic Experience
+            View Project Details
           </span>
         </div>
       </motion.div>
@@ -144,11 +144,11 @@ function ProjectCard({ project, idx, handleCinematicView }: { project: any, idx:
             </a>
           )}
           <button 
-            onClick={() => handleCinematicView(project.id)}
+            onClick={() => handleViewDetails(project.id)}
             className="group flex items-center gap-4 text-xs tracking-[0.3em] font-sans text-primary uppercase transition-colors hover:text-foreground w-fit"
           >
             <span className="w-6 h-[1px] bg-primary group-hover:bg-foreground transition-colors"></span>
-            Cinematic View
+            Read Case Study
           </button>
         </div>
       </div>
@@ -159,13 +159,9 @@ function ProjectCard({ project, idx, handleCinematicView }: { project: any, idx:
 export default function ProjectsGallery() {
   const { setPhase, setActiveProject } = useStore();
 
-  const handleCinematicView = (projectId: string) => {
-    // Scroll back to top to see the 3D cinematic hero
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-      setActiveProject(projectId);
-      setPhase('project');
-    }, 500);
+  const handleViewDetails = (projectId: string) => {
+    setActiveProject(projectId);
+    setPhase('project');
   };
 
   return (
@@ -193,7 +189,7 @@ export default function ProjectsGallery() {
 
         <div className="flex flex-col gap-40 lg:gap-60">
           {projects.map((project, idx) => (
-            <ProjectCard key={project.id} project={project} idx={idx} handleCinematicView={handleCinematicView} />
+            <ProjectCard key={project.id} project={project} idx={idx} handleViewDetails={handleViewDetails} />
           ))}
         </div>
       </div>

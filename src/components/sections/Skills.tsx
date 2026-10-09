@@ -25,69 +25,9 @@ const skillCategories = [
   }
 ];
 
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
-
-function ConstellationBackground() {
-  const pointsRef = useRef<THREE.Points>(null);
-  const linesRef = useRef<THREE.LineSegments>(null);
-
-  const { particleCount, positions, colors } = useMemo(() => {
-    const particleCount = 50;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-    
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 15;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 5 - 2;
-      
-      const color = new THREE.Color(Math.random() > 0.5 ? "#B69A62" : "#702C3B");
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
-    }
-    
-    return { particleCount, positions, colors };
-  }, []);
-
-  useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-      pointsRef.current.rotation.x = state.clock.elapsedTime * 0.01;
-    }
-    if (linesRef.current) {
-      linesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-      linesRef.current.rotation.x = state.clock.elapsedTime * 0.01;
-    }
-  });
-
-  return (
-    <group>
-      <points ref={pointsRef}>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={particleCount} array={positions} itemSize={3} args={[positions, 3]} />
-          <bufferAttribute attach="attributes-color" count={particleCount} array={colors} itemSize={3} args={[colors, 3]} />
-        </bufferGeometry>
-        <pointsMaterial size={0.05} vertexColors transparent opacity={0.6} sizeAttenuation />
-      </points>
-      {/* Subtle connecting lines could be added here, but dots are lighter */}
-    </group>
-  );
-}
-
 export default function Skills() {
   return (
     <section id="skills" className="py-24 md:py-40 bg-section relative overflow-hidden scroll-mt-24">
-      
-      {/* 3D Constellation Background */}
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-          <ConstellationBackground />
-        </Canvas>
-      </div>
-
       <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
         
         {/* Editorial Section Header */}

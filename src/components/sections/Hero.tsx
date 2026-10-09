@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export default function Hero({ onStart }: { onStart: () => void }) {
+export default function Hero() {
   return (
     <motion.div 
       className="absolute inset-0 flex flex-col justify-center pointer-events-none"
@@ -13,10 +13,10 @@ export default function Hero({ onStart }: { onStart: () => void }) {
       {/* Editorial decorative lines */}
       <div className="absolute top-0 bottom-0 left-[10%] w-[1px] bg-foreground/10 z-0"></div>
       
-      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] relative z-20 h-full items-center">
+      <div className="container mx-auto px-6 md:px-12 relative z-20 h-full flex items-center">
         
         {/* Left side: Editorial Typography */}
-        <div className="flex flex-col items-start text-left pointer-events-auto pl-[4%]">
+        <div className="flex flex-col items-start text-left pointer-events-auto pl-[4%] lg:pl-[8%] max-w-4xl">
           
           <motion.div
             className="flex items-center gap-6 mb-8"
@@ -32,7 +32,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
           </motion.div>
 
           <motion.h1 
-            className="font-display text-7xl sm:text-8xl md:text-[10rem] font-medium tracking-tight leading-[0.85] text-foreground mb-12 relative"
+            className="font-display text-7xl sm:text-8xl md:text-[10rem] lg:text-[12rem] font-medium tracking-tight leading-[0.85] text-foreground mb-12 relative"
             initial={{ y: 60, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ duration: 1.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -41,13 +41,13 @@ export default function Hero({ onStart }: { onStart: () => void }) {
           </motion.h1>
 
           <motion.div 
-            className="flex gap-6 items-start max-w-md mb-16"
+            className="flex gap-6 items-start max-w-xl mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 1.0, ease: "easeOut" }}
           >
             <div className="w-[2px] h-full bg-burgundy/60 mt-1 min-h-[60px]"></div>
-            <p className="text-base text-foreground-muted font-sans font-light leading-relaxed tracking-wide">
+            <p className="text-base md:text-lg text-foreground-muted font-sans font-light leading-relaxed tracking-wide">
               I design and develop premium, responsive websites that help businesses present their brand beautifully, build trust, and turn visitors into enquiries.
             </p>
           </motion.div>
@@ -66,28 +66,25 @@ export default function Hero({ onStart }: { onStart: () => void }) {
               Discuss Your Project
             </a>
 
-            <button 
-              onClick={onStart}
+            <a 
+              href="#projects"
               className="text-xs tracking-[0.2em] uppercase font-sans text-foreground-muted hover:text-foreground transition-colors relative group"
             >
               Explore Selected Work
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full"></span>
-            </button>
+            </a>
           </motion.div>
         </div>
 
-        {/* Right side: Portrait Space */}
-        <div className="hidden lg:block relative h-full">
-           {/* Vertical label text */}
-           <motion.div 
-             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rotate-90 origin-center text-xs tracking-[0.4em] text-foreground-muted uppercase font-sans whitespace-nowrap"
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 2, delay: 1.5 }}
-           >
-             Interactive Web Experience — 2026
-           </motion.div>
-        </div>
+        {/* Right side: Vertical label text */}
+        <motion.div 
+          className="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 rotate-90 origin-center text-xs tracking-[0.4em] text-foreground-muted uppercase font-sans whitespace-nowrap pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 1.5 }}
+        >
+          Interactive Web Experience — 2026
+        </motion.div>
 
       </div>
 
