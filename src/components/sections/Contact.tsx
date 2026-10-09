@@ -15,7 +15,7 @@ export default function Contact() {
         >
           <div className="flex items-center gap-4 mb-12">
             <span className="w-12 h-px bg-primary/40"></span>
-            <span className="text-[9px] tracking-[0.3em] font-sans text-primary uppercase">N° 06 — Connect</span>
+            <span className="text-[9px] tracking-[0.3em] font-sans text-primary uppercase">N° 08 — Connect</span>
             <span className="w-12 h-px bg-primary/40"></span>
           </div>
           

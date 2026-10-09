@@ -48,7 +48,7 @@ export default function Hero({ onStart }: { onStart: () => void }) {
           >
             <div className="w-[2px] h-full bg-burgundy/60 mt-1 min-h-[60px]"></div>
             <p className="text-base text-foreground-muted font-sans font-light leading-relaxed tracking-wide">
-              I design and build distinctive digital experiences for brands and businesses — combining thoughtful UI, fluid interaction, and reliable frontend engineering.
+              I design and develop premium, responsive websites that help businesses present their brand beautifully, build trust, and turn visitors into enquiries.
             </p>
           </motion.div>
 
@@ -58,21 +58,21 @@ export default function Hero({ onStart }: { onStart: () => void }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.4 }}
           >
-            <button 
-              onClick={onStart}
+            <a 
+              href="#contact"
               className="group relative flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-foreground uppercase hover:text-primary transition-colors duration-500"
             >
               <span className="w-6 h-[1px] bg-foreground group-hover:bg-primary transition-colors duration-500"></span>
-              Explore Selected Work
-            </button>
+              Discuss Your Project
+            </a>
 
-            <a 
-              href="#contact"
+            <button 
+              onClick={onStart}
               className="text-[10px] tracking-[0.2em] uppercase font-sans text-foreground-muted hover:text-foreground transition-colors relative group"
             >
-              Discuss a Project
+              Explore Selected Work
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-foreground transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </button>
           </motion.div>
         </div>
 

@@ -10,6 +10,8 @@ import AINarrator from "@/components/ai/AINarrator";
 
 // Actual imports for Phase 2 components
 import About from "@/components/sections/About";
+import Services from "@/components/sections/Services";
+import Process from "@/components/sections/Process";
 import Skills from "@/components/sections/Skills";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
@@ -57,8 +59,10 @@ export default function Home() {
       {/* SCROLLING CONTENT SECTIONS (Standard DOM) */}
       <div className="relative z-20 bg-background w-full">
         <About />
-        <Skills />
+        <Services />
+        <Process />
         <ProjectsGallery />
+        <Skills />
         <Experience />
         <Contact />
         <Footer />

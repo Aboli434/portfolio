@@ -39,7 +39,7 @@ export default function Skills() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex items-center gap-4 mb-10">
-              <span className="text-[9px] tracking-[0.3em] font-sans text-foreground-muted uppercase">N° 03</span>
+              <span className="text-[9px] tracking-[0.3em] font-sans text-foreground-muted uppercase">N° 06</span>
               <span className="w-16 h-px bg-foreground/20"></span>
               <span className="text-[9px] tracking-[0.3em] font-sans text-foreground uppercase">Capabilities</span>
             </div>

@@ -22,22 +22,23 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "intentflow",
-    name: "IntentFlow",
-    description: "AI-powered workflow/productivity platform. AI turns messy communication into structured work.",
-    problem: "Messy communication slows down workflows and productivity.",
-    idea: "Use AI to turn unstructured communication into organized tasks and workflows.",
-    role: "Developed the frontend, backend, and integrated AI features.",
-    technologies: ["Next.js", "React", "React Native", "TypeScript", "Fastify", "OpenAI", "Database architecture"],
-    challenges: "Handling real-time AI processing and structuring unstructured data reliably.",
-    learnings: "Advanced AI API integration, complex state management, and full-stack architecture.",
+    id: "aasamant",
+    name: "Aasamant",
+    description: "Hospitality website built from Figma designs with responsive layouts and animations.",
+    problem: "Hospitality business needed a modern, high-quality digital presence.",
+    idea: "Translate high-fidelity Figma designs into a pixel-perfect, interactive React application.",
+    role: "Frontend Developer.",
+    technologies: ["React", "Figma", "Animations"],
+    challenges: "Ensuring pixel-perfect implementation from design to code across all screen sizes.",
+    learnings: "Figma-to-React translation, responsive layout systems, and robust deployment pipelines.",
+    liveUrl: "https://aasamanthospitality.com/",
     aiNarration: {
-      intro: "This is IntentFlow, a project I've been building to turn unstructured communication into actionable work.",
-      problem: "I wanted to solve the translation gap between what clients say and what developers actually need to build.",
-      approach: "I created an experience where unstructured thoughts are automatically parsed by an AI agent into actionable work.",
-      role: "I worked across the full stack, designing the UI and integrating the OpenAI API.",
-      technologies: "I built the platform with Next.js, React, TypeScript, Fastify, and a complex database architecture.",
-      technicalHighlight: "A key highlight for me was managing real-time AI processing and complex state reliably."
+      intro: "This is Aasamant, a high-quality digital presence I built for a hospitality business.",
+      problem: "The client needed a modern, interactive platform that accurately reflected their real-world quality.",
+      approach: "I translated high-fidelity Figma designs into a pixel-perfect, interactive React application.",
+      role: "I served as the primary Frontend Developer.",
+      technologies: "I focused the stack on React and complex CSS animations.",
+      technicalHighlight: "My main focus was ensuring pixel-perfect implementation and robust responsive layouts across every screen size."
     }
   },
   {
@@ -81,26 +82,6 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "aasamant",
-    name: "Aasamant",
-    description: "Hospitality website built from Figma designs with responsive layouts and animations.",
-    problem: "Hospitality business needed a modern, high-quality digital presence.",
-    idea: "Translate high-fidelity Figma designs into a pixel-perfect, interactive React application.",
-    role: "Frontend Developer.",
-    technologies: ["React", "Figma", "Animations"],
-    challenges: "Ensuring pixel-perfect implementation from design to code across all screen sizes.",
-    learnings: "Figma-to-React translation, responsive layout systems, and robust deployment pipelines.",
-    liveUrl: "https://aasamanthospitality.com/",
-    aiNarration: {
-      intro: "This is Aasamant, a high-quality digital presence I built for a hospitality business.",
-      problem: "The client needed a modern, interactive platform that accurately reflected their real-world quality.",
-      approach: "I translated high-fidelity Figma designs into a pixel-perfect, interactive React application.",
-      role: "I served as the primary Frontend Developer.",
-      technologies: "I focused the stack on React and complex CSS animations.",
-      technicalHighlight: "My main focus was ensuring pixel-perfect implementation and robust responsive layouts across every screen size."
-    }
-  },
-  {
     id: "fashion",
     name: "Fashion Designer",
     description: "Elegant visual design, responsive layouts, animations, and showcasing a fashion designer's work.",
@@ -118,6 +99,25 @@ export const projects: Project[] = [
       role: "I handled the frontend development and visual polish.",
       technologies: "The stack is built on React and Next.js, with custom Tailwind styling.",
       technicalHighlight: "My focus was on fluid animations and ensuring the imagery took center stage."
+    }
+  },
+  {
+    id: "intentflow",
+    name: "IntentFlow",
+    description: "AI-powered workflow/productivity platform. AI turns messy communication into structured work.",
+    problem: "Messy communication slows down workflows and productivity.",
+    idea: "Use AI to turn unstructured communication into organized tasks and workflows.",
+    role: "Developed the frontend, backend, and integrated AI features.",
+    technologies: ["Next.js", "React", "React Native", "TypeScript", "Fastify", "OpenAI", "Database architecture"],
+    challenges: "Handling real-time AI processing and structuring unstructured data reliably.",
+    learnings: "Advanced AI API integration, complex state management, and full-stack architecture.",
+    aiNarration: {
+      intro: "This is IntentFlow, a project I've been building to turn unstructured communication into actionable work.",
+      problem: "I wanted to solve the translation gap between what clients say and what developers actually need to build.",
+      approach: "I created an experience where unstructured thoughts are automatically parsed by an AI agent into actionable work.",
+      role: "I worked across the full stack, designing the UI and integrating the OpenAI API.",
+      technologies: "I built the platform with Next.js, React, TypeScript, Fastify, and a complex database architecture.",
+      technicalHighlight: "A key highlight for me was managing real-time AI processing and complex state reliably."
     }
   }
 ];
